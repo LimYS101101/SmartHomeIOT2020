@@ -5,40 +5,44 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
+import android.widget.Button
 import android.widget.RelativeLayout
-import kotlinx.android.synthetic.*
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.view.*
 
 /*public class MainActivity extends AppCompatActivity*/
 
     class MainActivity : AppCompatActivity (){
 
-   // RelativeLayout button_layout,main_screen;
-  //  Handler handler = new Handler();
-   // Runnable runnable = new Runnable () {
+        private lateinit var mainsceen : RelativeLayout
+        private lateinit var belowbutton : RelativeLayout
+        private lateinit var btnsignup : Button
 
-    /*    public void run(){
-            button_layout.setVisibility(View.VISIBLE);
-            main_screen.setVisibility(View.VISIBLE);
+        var handler = Handler()
+        var runnable: Runnable = Runnable {
+            mainsceen.visibility = View.VISIBLE
+            belowbutton.visibility = View.VISIBLE
         }
 
-    };*/
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
+            setContentView(R.layout.activity_main)
+
+            mainsceen = findViewById(R.id.mainscreen)
+            belowbutton = findViewById(R.id.belowbutton)
+            btnsignup = findViewById(R.id.btnsignup)
+
+            handler.postDelayed(runnable,2000) //2000 is the timeout for the splash
+
+            btnsignup.setOnClickListener{
+                val intent = Intent(this, SignUpActivity::class.java)
+                startActivity(intent)
+            }
 
 
-       /* main_screen = (RelativeLayout) findViewById(R.id.main_screen);
-        button_layout = (RelativeLayout) findViewById(R.id.button_layout);
 
-            Handler().postDelayed({
-            startActivity(Intent(this@SplashActivity, MainActivity::class.java))
-
-            finish()
-        }, 2000)
-
-        handler.postDelay(runnable, 2000); //2000 is the timeout for the  splash*/
+        }
     }
-}
+
+
+
+
